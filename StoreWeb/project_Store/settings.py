@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'project_Store.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'django_oni_Delivery',
+        'USER': 'root',  #-> ดูที่ Grants ของ  Schemas ที่สร้าง
+        'PASSWORD': 'password1234',
+        'HOST': '127.0.0.1', #-> IP ตอน Runserver
+        'PORT': '3306'
     }
 }
 
@@ -110,6 +114,8 @@ LANGUAGE_CODE = 'th'
 TIME_ZONE = 'Asia/Bangkok'
 
 USE_I18N = True
+
+USE_L10N = True
 
 USE_TZ = True
 
