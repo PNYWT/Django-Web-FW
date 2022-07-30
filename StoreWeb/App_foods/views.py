@@ -1,17 +1,22 @@
 from django.shortcuts import render
 from django.http.response import HttpResponse
+from datetime import datetime
 
 # List of Menu Foods
 menu_Foods = [
     {
-        'id': 1, 'title': 'Dark Choco Premium', 'price': 499, 'is_premium': True
+        'id': 1, 'title': 'Dark Choco Premium 1 Box', 'price': 499, 'is_premium': True, 'end_Promotion':datetime(2022,7,7)
     },
     {
-        'id': 2, 'title': 'Red Spicy', 'price': 349, 'is_premium': False
+        'id': 2, 'title': 'Red Spicy 1 Box', 'price': 349, 'is_premium': False, 'end_Promotion':datetime(2022,7,7)
     },
     {
-        'id': 3, 'title': 'Blue', 'price': 349, 'is_premium': False
-    }
+        'id': 3, 'title': 'Blue Glacier 1 Box', 'price': 349, 'is_premium': False, 'end_Promotion':datetime(2022,7,7)
+    },
+    {
+        'id': 4, 'title': 'Blue Glacier 5 Box', 'price': 1499, 'is_premium': True, 'end_Promotion':datetime(2022,7,7)
+    },
+    
 ]
 
 # Create your views here.
