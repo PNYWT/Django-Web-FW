@@ -1,33 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'App_general/components/Base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Onit Delivery</title>
-</head>
 
-<body>
-    <!-- Header -->
-    <header style="background-color: lightgray;">
-        <a href="">Onit Delivery</a>
-        <a href="">Menu</a>
-        <a href="">About</a>
-    </header>
-    <div>
-        <h2>About Onit Delivery</h2>
-    </div>
-    <!-- Footer -->
-    <footer style="background-color: lightgray;">
-        <h5>ติดตามโปรโมชั่น</h5>
-        <p>
-            <a href="">Facebook</a>
-            <a href="">Twitter</a>
-            <a href="">Instagram</a>
-        </p>
-        <p>Copyright 2022 Onit Delivery. All right reserved</p>
-    </footer>
-</body>
+{% block Site_Title%} เกี่ยวกับ | {% endblock %}
 
-</html>
+{% block content %}
+<div>
+    <h2>About Onit Delivery</h2>
+</div>
+{% endblock %}
+
