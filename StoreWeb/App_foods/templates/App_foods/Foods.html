@@ -5,5 +5,16 @@
 {% block content %}
 <div>
     <h2>อยากสั่งอะไร ก็สั่งมาซิ</h2>
+    {% for food in menuFoods %}
+    <div style="background-color: rgb(223, 193, 235);">
+        <h3><a href="{% url 'foodId' food.id %}">{{ food.title }}</a></h3>
+        <p>{{ food.price }} THB</p>
+        {% if food.is_premium == True %}
+        <p>*** เมนู Premium หมดแล้วหมดเลย ***</p>
+        {% endif %}
+    </div>
+    {% empty %}
+    <p>Coming Soon . . .</p>
+    {% endfor %}
 </div>
 {% endblock %}
