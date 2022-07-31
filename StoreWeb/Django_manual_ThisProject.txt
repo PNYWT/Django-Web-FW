@@ -1,0 +1,81 @@
+pip install pipenv ใน CMD ก่อน
+
+เข้าไปใน Folder Project คำสั่งเปิด
+	pipenv --python 3.10
+	pipenv install django
+	pipenv shell -> สั่งใช้เฉพาะใน Folder Activate
+Run web serve
+	django-admin startproject <NameFolder> .
+	python manage.py runserver -> เปิดเว็บ
+กด ctrl+shift+p
+	ค้นหา >python select interpreter
+	เลือก python pipenv ของโปรเจ็คที่สร้าง
+สร้าง App แต่ละ Page
+	python manage.py startapp <NameApp>
+
+Views คือ การส่ง HttpResponse
+urls คือ การส่ง Link เข้าเว็บของเรา
+
+MySQL DataBase Connect
+1. Create database (name)
+2. Install mysql-connector-python -> pipenv install mysql-connector-python
+3. Change settings.py DataBases
+	mysql.connector.django ไปวางไว้ใน 'ENGINE'
+ตัวอย่าง
+DATABASES = {
+    'default': {
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'Name Schemas DataBase',
+        'USER': 'root',  #-> ดูที่ Grants ของ  Schemas ที่สร้าง
+        'PASSWORD': 'password1234',
+        'HOST': '127.0.0.1', #-> IP ตอน Runserver
+        'PORT': '3306'
+    }
+}
+4. migrate
+	python manage.py migrate
+สร้าง Model เสร็จแล้วก็
+	python manage.py makemigrations <NameApp>
+	python manage.py migrate #อีกครั้ง
+ใช้ python กับ mysql
+	pipenv bpython --dev # มีคำสั่งช่วยเวลาจะ  select insert sql 
+ 	sql -> python manage.py shell เพื่อเรียกใช้
+การ Import model
+	 from <NameModel.models> import <NameFunc>
+	ตัวอย่างการเพิ่ม
+	>>> from App_foods.models import FoodModel  
+	>>> from App_foods.models import FoodModel  
+	>>> food1 = FoodModel()
+	>>> food1.title = 'Red Spicy'
+	>>> food1.price = 349
+	>>> food1.save()
+	ตัวอย่างการแก้ไขหรือ Save ทับ
+	>>> food1.special_price = 299
+	>>> food1.description = 'sadasdasdasdas'
+	>>> food1.save()
+	การ save ข้อมูล datetime
+	>>> from datetime import datetime  
+	>>> date1 = datetime(2022,7,7)  #ปี เดือน วัน
+	>>> food1.end_Promotion = date1
+	>>> food1.save()
+	ตั่งค่า ZoneInfo Datetime
+	>>> from zoneinfo import ZoneInfo
+	>>> date2 = datetime(2022,7,8, tzinfo=ZoneInfo('Asia/Bangkok'))
+	>>> food1.end_Promotion = date2
+	>>> food1.save()
+การ Del data ที่ผิด
+	>>> food2.delete()
+Query ข้อมูล
+	Read all
+		>>> from App_foods.models import FoodModel
+		>>> all_food = FoodModel.objects.all()
+		>>> all_food
+	Only Premium foods
+		>>> preminum_food = FoodModel.object.filter(is_Premium=True)
+	Premium first
+		>>> preminum_food_sort = FoodModel.object.all().order_by('-is_Premium') #ใส่ลบเพื่อให้มันขึ้นก่อน เพราะเรียงจากน้อยไปมาก
+	Read all with pagination #ใช้แบ่งสินค้าต่อ 1 หน้า
+		>>> all_Page_Food = FoodModel.object.all()[0:1] #เริ่มจากสินค้าที่ 0 ถึง 1
+	Read one food
+		>>> one_food = Food.object.get(id=1)
+		>>> one_food.title #จะแสดงชื่ออาหาร id1
