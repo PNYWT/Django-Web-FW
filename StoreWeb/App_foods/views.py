@@ -31,6 +31,10 @@ def foods(request):
 
 # Menu id
 def foodId(request, food_Id):
-    idofMune = FoodModel.objects.get(id=food_Id)
-    context = { 'food' : idofMune}
+    oneMenu = None
+    try:
+        oneMenu = FoodModel.objects.get(id=food_Id)
+    except:
+        print("Not Found Index Menu")
+    context = { 'food' : oneMenu}
     return render(request, 'App_foods/foodId.html', context)

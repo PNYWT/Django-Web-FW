@@ -9,7 +9,7 @@
     {% if food.special_Price is not None %}
     <p>
         <span>{{ food.special_Price|floatformat:'g'}} THB</span>
-        <del>{{ food.price|floatformat:'g'}}</del>
+        <del>{{ food.price|floatformat:'g'}} THB</del>
     </p>
     {%else%}
     <p>{{ food.price|floatformat:'g'}} THB</p>

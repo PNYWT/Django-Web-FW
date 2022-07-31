@@ -1,0 +1,32 @@
+{% extends 'App_general/components/Base.html' %}
+
+
+{% block Site_Title%} ลงทะเบียนรับโปรโมชั่น | {% endblock %}
+
+{% block content %}
+<form action="">
+    <h2>ลงทะเบียนรับโปรโมชั่น</h2>
+    <p>กรุณากรอกข้อมูลให้ครบถ้วนเพื่อรับโปรโมชั่นพิเศษจากเรา</p>
+    <div>
+        <label for="">ชื่อ - นามสกุล</label>
+        <input type="text">
+    </div>
+    <div>
+        <label for="">Email</label>
+        <input type="email">
+    </div>
+    <div>
+        <label for="">เมนูที่สนใจ</label>
+        {% for food in menuFoods %}
+        <input type="checkbox"><label>{{ food.title }}</label>
+        {% endfor %}
+    </div>
+    <div>
+        <label for="">อ่านข้อตกลงและเงื่อนไข</label>
+        <input type="checkbox"><label>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ea totam voluptates
+            sint. Cupiditate distinctio ex accusantium nulla! Perferendis hic explicabo ut ad incidunt, aliquam quaerat
+            accusamus at recusandae consectetur.</label>
+    </div>
+    <a href="{% url 'Subcription_ty' %}">ยอมรับเงื่อนไขและโปรโมชั่น</a>
+</form>
+{% endblock %}
