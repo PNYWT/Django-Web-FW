@@ -6,10 +6,17 @@
 {% if food is not None %}
 <div>
     <h3>{{ food.title }}</h3>
+    {% if food.special_Price is not None %}
+    <p>
+        <span>{{ food.special_Price|floatformat:'g'}} THB</span>
+        <del>{{ food.price|floatformat:'g'}}</del>
+    </p>
+    {%else%}
     <p>{{ food.price|floatformat:'g'}} THB</p>
+    {%endif%}
 
     {% if food.is_premium == True %}
-        <p>*** เมนู Premium หมดแล้วหมดเลย ***</p>
+    <p>*** เมนู Premium หมดแล้วหมดเลย ***</p>
     {% endif %}
     <p>โปรโมชั่นถึงวันที่ {{ food.end_Promotion|date:'j N Y'}}</p>
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
@@ -20,6 +27,6 @@
         of Lorem Ipsum</p>
 </div>
 {% else %}
-    <p>ไม่พบเมนู</p>
+<p>ไม่พบเมนู</p>
 {% endif %}
 {% endblock %}

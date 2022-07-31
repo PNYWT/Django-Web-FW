@@ -8,8 +8,15 @@
     {% for food in menuFoods %}
     <div style="background-color: rgb(223, 193, 235);">
         <h3><a href="{% url 'foodId' food.id %}">{{ food.title }}</a></h3>
-        <p>{{ food.price|floatformat:'g'}} THB</p>
-        {% if food.is_premium == True %}
+        {% if food.special_Price is not None %}
+            <p>
+                <span>{{ food.special_Price|floatformat:'g'}} THB</span>
+                <del>{{ food.price|floatformat:'g'}}</del>
+            </p>
+        {%else%}
+            <p>{{ food.price|floatformat:'g'}} THB</p>
+        {%endif%}
+        {% if food.is_Premium == True %}
             <p>*** เมนู Premium หมดแล้วหมดเลย ***</p>
         {% endif %}
         <p>โปรโมชั่นถึงวันที่ {{ food.end_Promotion|date:'j N Y'}}</p>
