@@ -8,6 +8,7 @@ django = "*"
 mysql-connector-python = "*"
 
 [dev-packages]
+bpython = "*"
 
 [requires]
 python_version = "3.10"
