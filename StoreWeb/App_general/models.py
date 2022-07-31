@@ -17,4 +17,5 @@ class Subcription(models.Model):
     name = models.CharField(max_length=60)
     email = models.CharField(max_length=100, unique=True)
     status = models.CharField(max_length=15, choices=STATUS_choices, default='unapproved')
-    registered = models.DateTimeField(auto_now_add=True)
+    registered_at = models.DateTimeField(auto_now_add=True)
+    food_set = models.ManyToManyField('App_foods.FoodModel')
