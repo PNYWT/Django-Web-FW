@@ -7,7 +7,7 @@ from django.db import models
 
 # Create your models here.
 
-class Subcription(models.Model):
+class Subscription(models.Model):
     STATUS_choices = [
         ('unapproved', 'Unapproved'),
         ('approved', 'Approved'),

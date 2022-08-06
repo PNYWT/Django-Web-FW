@@ -1,0 +1,48 @@
+{% extends 'App_general/components/Base.html' %}
+
+
+{% block Site_Title%} ลงทะเบียนรับโปรโมชั่น | {% endblock %}
+
+{% block content %}
+<h2>ลงทะเบียนรับโปรโมชั่น</h2>
+<p>กรุณากรอกข้อมูลให้ครบถ้วนเพื่อรับโปรโมชั่นพิเศษจากเรา</p>
+
+<form action="{% url 'Subscription_form'%}" method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    
+    <!-- Form Name -->
+    <div style="margin-bottom: 16px">
+        {{ form.name.label_tag }}
+        {{ form.name }}
+        {{ form.name.errors }}
+    </div>
+    <!-- Form Email -->
+    <div style="margin-bottom: 16px">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        {{ form.email.errors }}
+    </div>
+    <!-- Form MultipleCheckBoxFood -->
+    <div style="margin-bottom: 16px">
+        {{ form.food_set.label_tag }}
+        {{ form.food_set }}
+        {{ form.food_set.errors }}
+    </div>
+
+    <!-- Form Accept Policy -->
+    <div style="margin-bottom: 16px">
+        <label>อ่านข้อตกลงและเงื่อนไข</label>
+        <label> 
+            {{ form.acceptedPolicy }}
+            {{ form.acceptedPolicy.label }}
+        </label>
+        {{ form.acceptedPolicy.errors }}
+    </div>
+
+    <!-- Accept Policy Button -->
+    <div style="margin-bottom: 16px;">
+        <button type="submit">ลงทะเบียนรับโปรโมชั่น</button>
+    </div>
+</form>
+{% endblock %}
