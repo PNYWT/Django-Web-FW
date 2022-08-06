@@ -5,10 +5,15 @@
 
 {% block content %}
 <!-- Content 1-->
-<div>
-    <h1>Oni Delivery</h1>
-    <p>สั่งอะไร ก็สั่งมา เดี๋ยวส่งให้</p>
-</div>
+<section class="home-landing-section">
+    <h1 class="home-landing-text">Oni Delivery</h1>
+    <h5 class="home-landing-text">สั่งอะไร ก็สั่งมา เดี๋ยวส่งให้</h5>
+    <h6 class="home-landing-text">จัดส่งไอศครีมรสโปรดของคุณ อยากส่งให้ตอนไหนเดี๋ยวบอกเอง รอไม่ได้ก็ไม่ต้องสั่งเดี๋ยวกินเอง</h6>
+    <p>
+        <a href="{% url 'Foods' %}" class="button">ดูเมนูทั้งหมด</a>
+        <a href="{% url 'Subscription_form' %}" class="button button-primary">ลงทะเบียนรับโปรโมทชั่น</a>
+    </p>
+</section>
 <!-- Content 2 -->
 <section>
     <h4>ซื้อกับ Oni Delivery ดียังไง</h4>
