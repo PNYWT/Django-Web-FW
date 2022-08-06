@@ -1,4 +1,5 @@
 {% extends 'App_general/components/Base.html' %}
+{% load static %}
 
 {% block Site_Title%} เมนูทั้งหมด | {% endblock %}
 
@@ -7,6 +8,9 @@
     <h2>อยากสั่งอะไร ก็สั่งมาซิ</h2>
     {% for food in menuFoods %}
     <div style="background-color: rgb(223, 193, 235);">
+        <div>
+            <img src="{% static food.image_relative_url %}" alt="">
+        </div>
         <h3><a href="{% url 'foodId' food.id %}">{{ food.title }}</a></h3>
         {% if food.special_Price is not None %}
             <p>

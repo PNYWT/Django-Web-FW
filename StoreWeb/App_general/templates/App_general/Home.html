@@ -1,10 +1,43 @@
 {% extends 'App_general/components/Base.html' %}
+{% load static %}
 
 {% block Site_Title %} หน้าแรก | {% endblock %}
 
 {% block content %}
+<!-- Content 1-->
 <div>
     <h1>Oni Delivery</h1>
     <p>สั่งอะไร ก็สั่งมา เดี๋ยวส่งให้</p>
 </div>
+<!-- Content 2 -->
+<section>
+    <h4>ซื้อกับ Oni Delivery ดียังไง</h4>
+
+    <div>
+        <!-- img home-about-1 -->
+        <div>
+            <img src="{% static 'App_general/home-about-1.jpg' %}" alt="">
+        </div>
+        <p>Oni Delivery คือ บริการจัดส่งไอศครีมอร่อยถึงมือคุณ สภาพกล่องจะเละแค่ไหนไม่สำคัญ
+            ลองชิมไอศครีมของเราก่อนเดี๋ยวก็หายโมโหเอง</p>
+    </div>
+
+    <div>
+        <!-- img home-about-2 -->
+        <div>
+            <img src="{% static 'App_general/home-about-2.jpg' %}" alt="">
+        </div>
+        <p>พนักงานของ Oni Man เราส่งไอศครีม ขับไวแบบย้อนศร ขับบนทางเท้า ผ่าไฟแดง เราหยุดให้เฉพาะทางม้าลายเท่านั้น
+            พนักงานของจันทร์ไรเดอร์ทำแบบไหน Oni Delivery จะทำตรงข้าม</p>
+    </div>
+
+    <div>
+        <!-- img home-about-3 -->
+        <div>
+            <img src="{% static 'App_general/home-about-3.jpg' %}" alt="">
+        </div>
+        <p>Oni Delivery คือ บริการจัดส่งไอศครีมอร่อยถึงมือคุณ สภาพกล่องจะเละแค่ไหนไม่สำคัญ
+            ลองชิมไอศครีมของเราก่อนเดี๋ยวก็หายโมโหเอง</p>
+    </div>
+</section>
 {% endblock %}

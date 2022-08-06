@@ -1,6 +1,10 @@
+{% load static %}
  <!-- Header -->
  <header style="background-color: lightgray;">
-    <a href="{% url 'homeMain' %}">Oni Delivery</a>
+    <a href="{% url 'homeMain' %}">
+        <img src="{% static 'App_general/logo.png' %}" alt="">
+        <span>Oni Delivery</span>
+    </a>
     <a href="{% url 'Foods' %}">Menu</a>
     <a href="{% url 'about' %}">About</a>
 </header>

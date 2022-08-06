@@ -10,6 +10,7 @@ class FoodModel(models.Model):
     is_Premium = models.BooleanField(default=False)
     end_Promotion = models.DateTimeField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
+    image_relative_url = models.CharField(max_length=60, null=True, blank=True)
 
     def __str__(self) -> str:
         return '{} (id={})'.format(self.title, self.id)

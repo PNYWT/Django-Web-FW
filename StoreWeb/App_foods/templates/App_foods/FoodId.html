@@ -1,10 +1,14 @@
 {% extends 'App_general/components/Base.html' %}
+{% load static %}
 
 {% block Site_Title%} รายการที่ {{ food.id }} :{{ food.title }} | {% endblock %}
 
 {% block content %}
 {% if food is not None %}
 <div>
+    <div>
+        <img src="{% static food.image_relative_url %}" alt="">
+    </div>
     <h3>{{ food.title }}</h3>
     {% if food.special_Price is not None %}
     <p>
