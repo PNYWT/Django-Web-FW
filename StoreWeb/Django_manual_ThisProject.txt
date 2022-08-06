@@ -1,3 +1,7 @@
+- แก้ไขเรื่อง migration error Datatime เปิด USE_TZ = True 
+จากนั้น  pipenv uninstall mysql-connector-python
+แล้วลง ตัวใหม่ 8.0.29 คำสั่ง pipenv install 'mysql-connector-python<=8.0.29'
+
 pip install pipenv ใน CMD ก่อน
 
 เข้าไปใน Folder Project คำสั่งเปิด
@@ -40,9 +44,10 @@ DATABASES = {
 ใช้ python กับ mysql
 	pipenv bpython --dev # มีคำสั่งช่วยเวลาจะ  select insert sql 
  	sql -> python manage.py shell เพื่อเรียกใช้
-การ Import model
+การ Import model เพื่อเพิ่มข้อมูล
 	 from <NameModel.models> import <NameFunc>
-	ตัวอย่างการเพิ่ม
+
+	ตัวอย่างการเพิ่ม App_foods.models
 	>>> from App_foods.models import FoodModel  
 	>>> from App_foods.models import FoodModel  
 	>>> food1 = FoodModel()
@@ -63,6 +68,14 @@ DATABASES = {
 	>>> date2 = datetime(2022,7,8, tzinfo=ZoneInfo('Asia/Bangkok'))
 	>>> food1.end_Promotion = date2
 	>>> food1.save()
+
+	ตัวอย่างการเพิ่ม App_generel.models
+	>>> from App_general.models import Subcription
+	>>> new_sub = Subcription()
+	>>> new_sub.name = 'Admintest'
+	>>> new_sub.email = 'admintest@mail.com'
+	>>> new_sub.save()
+
 การ Del data ที่ผิด
 	>>> food2.delete()
 Query ข้อมูล
@@ -79,3 +92,74 @@ Query ข้อมูล
 	Read one food
 		>>> one_food = Food.object.get(id=1)
 		>>> one_food.title #จะแสดงชื่ออาหาร id1
+
+Relation Table M-M
+สร้าง Table สำหรับ m-m ระหว่าง App_foods.models กับ App_general.models ลงไปใน Subcription Model
+	food_set = models.ManyToManyField('App_foods.FoodModel')
+	Create เชื่อมความ relationship ของทั้ง 2 table เข้าด้วยกัน
+		>>> from App_foods.models import FoodModel
+		>>> selected_foods = FoodModel.objects.filter(id__in=[1,2])  #กำหนดให้เลือก Foods id 1 และ 2 ความเป็นจริง เช่น user จะเลือกได้ว่าจะรับข่าวอะไรบ้าง
+		>>> selected_foods
+		>>> from App_general.models import Subcription
+		>>> new_sub.food_set.set(selected_foods)  #เอาสิ่งที่ user เลือกมาไว้ใน table Subcription_food_set ว่า user แต่ละคนติดตามอะไรบ้าง
+	Edit/Update การแก้ไขค่าที่ user เลือกไป
+		>>> new_sub2 = Subcription() 
+		>>> new_sub2.name = 'Admintest2'
+		>>> new_sub2.email = 'admintest2@mail.com'
+		>>> new_sub2.save()
+		>>> selected_foods = FoodModel.objects.filter(id__in=[1,2])
+		>>> new_sub2.food_set.set(selected.foods)
+		แก้ไขสิ่งที่เลือก
+		>>> selected_foods_2 = FoodModel.objects.filter(id__in=[2])
+		>>> new_sub2.food_set.set(selected_foods_2)  
+	Delete การลบ -> จะลบข้อมูลออกที่ App_general_subscription เมื่อลบแล้วข้อมูลใน App_general_subscription_food_set ที่เชื่อมกับ Table food and Table subscription ข้อมูลของ user ที่ลบจะหายไปด้วย
+		>>> new_sub3 = Subcription() 
+		>>> new_sub3.name = 'Admintest2'
+		>>> new_sub3.email = 'admintest2@mail.com'
+		>>> new_sub3.save()
+		>>> new_sub3.food_set.set(selected.foods)
+		>>> new_sub3.delete()
+	การอ่าน 1 อย่าง Relation : Read one with relation เป็นการอ่านข้อมูลสินค้า 1 ชิ้นแล้วดึงคนที่ติดตามสินค้าชิ้นนี้มาแสดง
+		>>> from App_foods.models import FoodModel
+		>>> from App_general.models import Subcription
+		>>> one_food = FoodModel.objects.get(id=2)  -> เป็นการเลือก Food_id = 2
+		>>> one_food.title -> แสดง 'Dark Choco Premium'
+		>>> food_s = one_food.subcription_set.all()  -> แสดงคนที่ติดตามอาหาร Food_id 2 ขึ้นมา
+		>>> food_s
+	การอ่านทั้งหมด Read all with relation
+		>>> from App_foods.models import FoodModel
+		>>> from App_general.models import Subcription
+		>>> all_subs = Subcription.objects.all()
+		>>> all_subs[0]  แสดง<Subcription: Subcription object (1)>
+		>>> sub_1_foods = all_subs[0].food_set.all() #เรียกดูว่า index 0 ถูกใจ food_id กี่ id
+		>>> sub_1_foods แสดง <QuerySet [<FoodModel: FoodModel object (1)>, <FoodModel: FoodModel object (2)>]>
+		>>> sub2_foods = all_subs[1].food_set.all()  #เรียกดูว่า index 1 ถูกใจ food_id กี่ id
+		>>> sub2_foods
+HTTP Methods = ตัวกำหนดจุดประสงค์ในการใช้ URL
+	Post = เพิ่มข้อมูล/แก้ไขข้อมูล/ลบข้อมูล
+		<form action="{% url 'Subcription_form'%}" method="post">{% csrf_token %} abc </form>
+	Get = อ่านข้อมูล
+		name = request.Post.get('Nameoftag') -> เก็บข้อมูลที่บันทึกมาจาก Form โดยดึงค่ามาจาก Tag ชื่อที่ตั้งไว้ใน View ค่านั้นเก็บลงในตัวแปร name
+
+SuperUser (Admin)
+	- python manage.py createsuperuser
+	admin password1234
+	สร้าง Class ตกแต่งหน้า admin
+		-  list_display คือแสดงชื่อ column ใส่ค่าเป็น ['nameA', 'nameB'] จาก model ที่ต้องการ
+		- search_fields คือช่องค้นหา
+		- list_filter  คือช่อง filter อะไรที่ต้องการกก็ใส่ไป
+		ตัวอย่าง
+		class FoodModelAdmin(admin.ModelAdmin):
+   			list_display = ['title', 'price', 'special_Price', 'is_Premium', 'end_Promotion', 'description']
+    			search_fields = ['title']
+ 			list_filter =  ['is_Premium']
+	- admin.site.register(Model, Options) ใน admin.py ของ module ที่ต้องการ
+	
+
+CSS
+	Normalize Css -> reset css
+		- https://necolas.github.io/normalize.css/
+	Embed Google Fonts -> font family
+		- https://google-webfonts-helper.herokuapp.com/
+	Css Generator -> Tools css
+		- https://css-generator.netlify.app
