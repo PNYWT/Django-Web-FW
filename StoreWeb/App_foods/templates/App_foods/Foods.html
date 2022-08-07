@@ -4,29 +4,35 @@
 {% block Site_Title%} เมนูทั้งหมด | {% endblock %}
 
 {% block content %}
-<div>
-    <h2>อยากสั่งอะไร ก็สั่งมาซิ</h2>
-    {% for food in menuFoods %}
-    <div style="background-color: rgb(223, 193, 235);">
-        <div>
-            <img src="{% static food.image_relative_url %}" alt="">
+<section class="content-section content-section-fewText">
+    <div class="content.container">
+        <h3 class="content-title">อยากสั่งอะไร ก็สั่งมาซิ</h3>
+        {% if menuFoods.count > 0 %}
+        <div class="content-grid content-gridWeb">
+            {% for food in menuFoods %}
+            <div>
+                <a href="food-image-link" href="{% url 'foodId' food.id %}">
+                    <img class="image-block" src="{% static food.image_relative_url %}">
+                </a>
+                <h3><a href="{% url 'foodId' food.id %}">{{ food.title }}</a></h3>
+                {% if food.special_Price is not None %}
+                <p>
+                    <span>{{ food.special_Price|floatformat:'g'}} THB</span>
+                    <del class="text-gray">{{ food.price|floatformat:'g'}} THB</del>
+                </p>
+                {% else %}
+                <p>{{ food.price|floatformat:'g'}} THB</p>
+                {% endif %}
+                {% if food.is_Premium == True %}
+                <p>*** เมนู Premium หมดแล้วหมดเลย ***</p>
+                {% endif %}
+                <p>โปรโมชั่นถึงวันที่ {{ food.end_Promotion|date:'j N Y'}}</p>
+            </div>
+            {% endfor %}
         </div>
-        <h3><a href="{% url 'foodId' food.id %}">{{ food.title }}</a></h3>
-        {% if food.special_Price is not None %}
-            <p>
-                <span>{{ food.special_Price|floatformat:'g'}} THB</span>
-                <del>{{ food.price|floatformat:'g'}} THB</del>
-            </p>
-        {%else%}
-            <p>{{ food.price|floatformat:'g'}} THB</p>
-        {%endif%}
-        {% if food.is_Premium == True %}
-            <p>*** เมนู Premium หมดแล้วหมดเลย ***</p>
+        {% else %}
+        <p>Coming Soon . . .</p>
         {% endif %}
-        <p>โปรโมชั่นถึงวันที่ {{ food.end_Promotion|date:'j N Y'}}</p>
     </div>
-    {% empty %}
-    <p>Coming Soon . . .</p>
-    {% endfor %}
-</div>
+</section>
 {% endblock %}

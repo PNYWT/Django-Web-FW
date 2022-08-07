@@ -79,6 +79,16 @@ a{
     color: rgb(4, 100, 216);
 }
 
+.text-gray {
+    color: #888888;
+  }
+
+.text-center{
+    text-align: center;
+}
+
+/* Button */
+
 .button{
     color: whitesmoke;
     background-color: #333333;
@@ -101,7 +111,53 @@ a{
     background-color:  #738ffe;
 }
 
+.image-block {
+    display: block;
+    max-width: 100%;
+    margin-bottom: 12px;
+}
+
+/* Content */
+/* Section&container&Grid */
+
+.content-section {
+    padding: 64px 16px;
+}
+
+.content-section-fewText{
+    min-height: calc(100vh - 120px);
+}
+
+.content-container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}  
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 16px;
+    row-gap: 16px;
+    margin-bottom: 16px;
+}
+
+@media screen and (min-width: 768px) {
+    .content-gridIpad{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .content-gridWeb{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.content-title{
+    margin-bottom: 24px;
+}
+
 /* Site-header */
+
 .site-header{
     background-color: whitesmoke;
     border-bottom: 1px solid rgb(215, 215, 215);
@@ -161,3 +217,8 @@ a{
     margin-top: 0px;
     margin-bottom: 24px;
 }
+
+/* Foods */
+.food-image-link {
+    display: block;
+  }
