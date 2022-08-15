@@ -5,36 +5,35 @@
 
 {% block content %}
 <section class="content-section content-section-single">
-    <div class="content-container">
-        <h2>ลงทะเบียนรับโปรโมชั่น</h2>
+    <div class="content-container content-container-narrow">
+        <h2 class="content-title">ลงทะเบียนรับโปรโมชั่น</h2>
         <p>กรุณากรอกข้อมูลให้ครบถ้วนเพื่อรับโปรโมชั่นพิเศษจากเรา</p>
-
-        <form action="{% url 'Subscription_form'%}" method="post">
+        <form class="subscription-formJS" action="{% url 'Subscription_form'%}" method="post">
             {% csrf_token %}
             {{ form.non_field_errors }}
 
             <!-- Form Name -->
-            <div style="margin-bottom: 16px">
-                {{ form.name.label_tag }}
+            <div class="form-field">
+                <b>{{ form.name.label_tag }}</b>
                 {{ form.name }}
                 {{ form.name.errors }}
             </div>
             <!-- Form Email -->
-            <div style="margin-bottom: 16px">
-                {{ form.email.label_tag }}
+            <div class="form-field">
+                <b>{{ form.email.label_tag }}</b>
                 {{ form.email }}
                 {{ form.email.errors }}
             </div>
             <!-- Form MultipleCheckBoxFood -->
-            <div style="margin-bottom: 16px">
-                {{ form.food_set.label_tag }}
+            <div class="form-field">
+                <b>{{ form.food_set.label_tag }}</b>
                 {{ form.food_set }}
                 {{ form.food_set.errors }}
             </div>
 
             <!-- Form Accept Policy -->
-            <div style="margin-bottom: 16px">
-                <label>อ่านข้อตกลงและเงื่อนไข</label>
+            <div class="form-field">
+                <b><label>อ่านข้อตกลงและเงื่อนไข</label></b>
                 <label>
                     {{ form.acceptedPolicy }}
                     {{ form.acceptedPolicy.label }}
@@ -43,8 +42,8 @@
             </div>
 
             <!-- Accept Policy Button -->
-            <div style="margin-bottom: 16px;">
-                <button type="submit">ลงทะเบียนรับโปรโมชั่น</button>
+            <div class="form-field">
+                <button class="button button-primary" type="submit">ลงทะเบียนรับโปรโมชั่น</button>
             </div>
         </form>
 </section>
