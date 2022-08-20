@@ -30,9 +30,9 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG') == 'True'
 
-production_HOST = os.getenv("PRODUCTION_HOST")
+production_host = os.getenv("PRODUCTION_HOST")
 # เขียน if else แบบสั้น
-ALLOWED_HOSTS = [production_HOST] if production_HOST is not None else []
+ALLOWED_HOSTS = [production_host] if production_host is not None else []
 # if PRODUCTION_HOST is not None:
 #     ALLOWED_HOSTS = [PRODUCTION_HOST]  
 # else:
