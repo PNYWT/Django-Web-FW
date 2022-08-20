@@ -1,0 +1,42 @@
+{% extends 'App_general/components/Base.html' %}
+{% load static %}
+
+{% block Site_Title%} เมนูทั้งหมด | {% endblock %}
+
+{% block content %}
+<section class="content-section content-section-single">
+    <div class="content-container">
+        <h3 class="content-title">อยากสั่งอะไร ก็สั่งมาซิ</h3>
+        {% if menuFoods.count > 0 %}
+        <div class="grid grid-3">
+            {% for food in menuFoods %}
+            <div>
+                <a class="food-image-link" href="{% url 'foodId' food.id %}">
+                    <img class="image-block " src="{% static food.image_relative_url %}">
+                </a>
+                <h6 class="food-title">
+                    <a href="{% url 'foodId' food.id %}">{{ food.title }}</a>
+                </h6>
+                {% if food.special_Price is not None %}
+                <p>
+                    <b>{{ food.special_Price|floatformat:'g'}} THB</b>
+                    <del class="text-gray">{{ food.price|floatformat:'g'}} THB</del>
+                </p>
+                {% else %}
+                <p><b>{{ food.price|floatformat:'g'}} THB</b></p>
+                {% endif %}
+                {% if food.is_Premium == True %}
+                <p>*** เมนู Premium หมดแล้วหมดเลย ***</p>
+                {% endif %}
+                {% if food.end_Promotion is not None %}
+                <p>โปรโมชั่นถึงวันที่ {{ food.end_Promotion|date:'j N Y'}}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>Coming Soon . . .</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

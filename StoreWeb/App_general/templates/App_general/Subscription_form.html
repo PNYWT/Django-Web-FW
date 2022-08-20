@@ -1,0 +1,51 @@
+{% extends 'App_general/components/Base.html' %}
+
+
+{% block Site_Title%} ลงทะเบียนรับโปรโมชั่น | {% endblock %}
+
+{% block content %}
+<section class="content-section content-section-single">
+    <div class="content-container content-container-narrow">
+        <h2 class="content-title">ลงทะเบียนรับโปรโมชั่น</h2>
+        <p>กรุณากรอกข้อมูลให้ครบถ้วนเพื่อรับโปรโมชั่นพิเศษจากเรา</p>
+        <form class="subscription-formJS" action="{% url 'Subscription_form'%}" method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <!-- Form Name -->
+            <div class="form-field">
+                <b>{{ form.name.label_tag }}</b>
+                {{ form.name }}
+                {{ form.name.errors }}
+            </div>
+            <!-- Form Email -->
+            <div class="form-field">
+                <b>{{ form.email.label_tag }}</b>
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+            <!-- Form MultipleCheckBoxFood -->
+            <div class="form-field">
+                <b>{{ form.food_set.label_tag }}</b>
+                {{ form.food_set }}
+                {{ form.food_set.errors }}
+            </div>
+
+            <!-- Form Accept Policy -->
+            <div class="form-field">
+                <b><label>อ่านข้อตกลงและเงื่อนไข</label></b>
+                <label>
+                    {{ form.acceptedPolicy }}
+                    {{ form.acceptedPolicy.label }}
+                </label>
+                {{ form.acceptedPolicy.errors }}
+            </div>
+
+            <!-- Accept Policy Button -->
+            <div class="form-field">
+                <button class="button button-primary" type="submit">ลงทะเบียนรับโปรโมชั่น</button>
+            </div>
+        </form>
+</section>
+</div>
+{% endblock %}
