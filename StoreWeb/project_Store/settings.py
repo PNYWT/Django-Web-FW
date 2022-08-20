@@ -31,6 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG') == 'True'
 
 PRODUCTION_HOST = os.getenv('PRODUCTION_HOST')
+# เขียน if else แบบสั้น
 # ALLOWED_HOSTS = [PRODUCTION_HOST] if PRODUCTION_HOST is not None else []
 if PRODUCTION_HOST is not None:
     ALLOWED_HOSTS = [PRODUCTION_HOST]  
