@@ -1,8 +1,3 @@
-from atexit import register
-from datetime import datetime
-import email
-from pyexpat import model
-from statistics import mode
 from django.db import models
 
 # Create your models here.

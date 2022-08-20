@@ -1,5 +1,9 @@
+from django.http import HttpRequest
 from django.shortcuts import render
 from django.http.response import HttpResponse
+from django.urls import reverse
+
+
 from datetime import datetime
 # import List of Menu Foods
 from .models import FoodModel
