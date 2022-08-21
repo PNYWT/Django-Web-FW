@@ -4,8 +4,8 @@ from django.shortcuts import render
 from django.urls import reverse
 # from App_general.forms import SubscriptionForm, SubscriptionModelForm
 # from App_general.models import Subscription
-from .forms import SubscriptionModelForm
-from .models import Subscription
+from App_general.forms import SubscriptionModelForm
+from App_general.models import Subscription
 
 # Create your views here.
 def homePage(request):

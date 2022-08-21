@@ -6,7 +6,7 @@ from django.urls import reverse
 
 from datetime import datetime
 # import List of Menu Foods
-from .models import FoodModel
+from App_foods.models import FoodModel
 
 # List of Menu Foods
 # menu_Foods = [
